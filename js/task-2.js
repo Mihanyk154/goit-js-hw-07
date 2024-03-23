@@ -1,29 +1,29 @@
-class Storage {
-    #items;
 
-    constructor(initialItems) {
-        this.#items = initialItems;
-    }
+const images = [
+    {
+        url: "https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?dpr=2&h=750&w=1260",
+        alt: "White and Black Long Fur Cat",
+    },
+    {
+        url: "https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?dpr=2&h=750&w=1260",
+        alt: "Orange and White Koi Fish Near Yellow Koi Fish",
+    },
+    {
+        url: "https://images.pexels.com/photos/219943/pexels-photo-219943.jpeg?dpr=2&h=750&w=1260",
+        alt: "Group of Horses Running",
+    },
+];
 
-    getItems() {
-        return this.#items;
-    }
+const galleryList = document.querySelector('.gallery');
 
-    addItem(newItem) {
-        this.#items.push(newItem);
-    }
+const galleryItems = images.map(image => {
+    const li = document.createElement('li');
+    li.classList.add('gallery-item');
+    const img = document.createElement('img');
+    img.src = image.url;
+    img.alt = image.alt;
+    li.appendChild(img);
+    return li;
+});
 
-    removeItem(itemToRemove) {
-        const index = this.#items.indexOf(itemToRemove);
-        if (index !== -1) {
-            this.#items.splice(index, 1);
-        }
-    }
-}
-
-const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
-console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
-storage.addItem("Droid");
-console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
-storage.removeItem("Prolonger");
-console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+galleryList.append(...galleryItems);
